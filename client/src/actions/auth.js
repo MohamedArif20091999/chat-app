@@ -16,10 +16,14 @@ export const registerUser = (userName, email, password) => async (dispatch) => {
 };
 
 export const loginUser = (email, password) => async (dispatch) => {
-  console.log("EMAIL PASS:", email, password);
   const res = await axios.post("/auth/login", {
     email: email,
     password: password,
   });
-  console.log("LOGIN RESP:", res.data);
+  const token = res.data.token;
+  localStorage.setItem("jid", token);
+  if (res.data.status === "success") {
+    console.log("Success route to home");
+    history.push("/home");
+  }
 };
