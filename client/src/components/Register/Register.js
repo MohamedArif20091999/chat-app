@@ -17,6 +17,7 @@ const Register = () => {
         //   onFinish={onFinish}
         //   onFinishFailed={onFinishFailed}
       >
+        <h1>Welcome to chatapp</h1>
         <Form.Item
           label="Username"
           name="username"
@@ -64,6 +65,11 @@ const Register = () => {
             Submit
           </Button>
         </Form.Item>
+        <p>
+          <a>
+            Already have an account?<u> login</u>
+          </a>
+        </p>
       </Form>
     </div>
   );
