@@ -22,6 +22,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   });
   const token = res.data.token;
   localStorage.setItem("jid", token);
+  localStorage.setItem("userId", res.data.user.userId);
   if (res.data.status === "success") {
     console.log("Success route to home");
     history.push("/home");

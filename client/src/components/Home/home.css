@@ -7,3 +7,19 @@
 .content{
     font-size: 1.5rem;
 }
+.list-item:hover{
+    background-color: #00000029;
+    cursor: pointer;
+}
+.list-item::selection{
+    background-color: #00000029;
+}
+.side-head{
+    font-size: 1.5rem;
+}
+.side-head-main{
+    text-align: center;
+}
+/* a:hover{
+    color: blue !important;
+} */

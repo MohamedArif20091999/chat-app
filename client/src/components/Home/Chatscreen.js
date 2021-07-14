@@ -9,7 +9,11 @@ const Chatscreen = () => {
   const userName = "Arif";
   const sendChat = (e) => {
     e.preventDefault();
-    socket.emit("chat", { message, userName });
+    socket.emit("chat", {
+      message,
+      from: "60eec4931d6ddc418d787fb0",
+      to: "60eee66391f94710aea293bc",
+    });
     setMessage("");
   };
   useEffect(() => {
@@ -19,6 +23,14 @@ const Chatscreen = () => {
   });
   return (
     <div>
+      <h1>Chatty app</h1>
+      {chat.map((payload, index) => {
+        return (
+          <p key={index}>
+            {payload.message}: <span>id: {payload.userName}</span>
+          </p>
+        );
+      })}
       <form onSubmit={sendChat}>
         <input
           type="text"
@@ -31,25 +43,6 @@ const Chatscreen = () => {
         />
         <button type="submit">Send</button>
       </form>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
     </div>
   );
 };
