@@ -2,11 +2,8 @@ import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../actions";
 import { Layout, Menu, List, Avatar, Table } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import Chatscreen from "./Chatscreen";
+
 import "./home.css";
 
 const { SubMenu } = Menu;
@@ -23,24 +20,9 @@ const Home = () => {
 
   console.log("Put me in comp:", allUsers);
 
-  const data = [
-    {
-      title: "Ant Design Title 1",
-    },
-    {
-      title: "Ant Design Title 2",
-    },
-    {
-      title: "Ant Design Title 3",
-    },
-    {
-      title: "Ant Design Title 4",
-    },
-  ];
-
   return (
     <Layout>
-      <Header className="header">
+      <Header className="header" style={{}}>
         <div className="logo"></div>
       </Header>
       <Layout>
@@ -73,6 +55,33 @@ const Home = () => {
             )}
           />
         </Sider>
+        <Layout>
+          <Content
+            className="content"
+            style={{ margin: "44px 300px 0", overflow: "initial" }}
+          >
+            <Chatscreen></Chatscreen>
+            {/* <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p>
+            <p>Content</p> */}
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
   );

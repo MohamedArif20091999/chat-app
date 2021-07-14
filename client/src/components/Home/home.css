@@ -1,3 +1,9 @@
+*{
+    font-family: 'Lato', sans-serif;
+}
 .ant-layout-sider{
     background-color: whitesmoke ;
+}
+.content{
+    font-size: 1.5rem;
 }
