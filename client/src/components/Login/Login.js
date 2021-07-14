@@ -1,13 +1,9 @@
 import react from "react";
 import { Form, Input, Button } from "antd";
-import { useHistory } from "react-router-dom";
-import "./register.css";
 
-const Register = () => {
-  let history = useHistory();
-
+const Login = () => {
   return (
-    <div className="Register">
+    <div className="Login">
       <Form
         className="form"
         name="basic"
@@ -20,19 +16,6 @@ const Register = () => {
         //   onFinish={onFinish}
         //   onFinishFailed={onFinishFailed}
       >
-        <h1>Welcome to chatapp</h1>
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
         <Form.Item
           label="email"
           name="email"
@@ -68,14 +51,9 @@ const Register = () => {
             Submit
           </Button>
         </Form.Item>
-        <p>
-          <a onClick={() => history.push("/login")}>
-            Already have an account?<u> login</u>
-          </a>
-        </p>
       </Form>
     </div>
   );
 };
 
-export default Register;
+export default Login;
