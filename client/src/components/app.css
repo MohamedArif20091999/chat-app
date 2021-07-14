@@ -1,0 +1,6 @@
+@import '~antd/dist/antd.css';
+
+.Register{
+    margin: 0 auto !important;
+    color: aqua !important;
+}
