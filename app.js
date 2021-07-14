@@ -23,7 +23,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 
 io.on("connection", (socket) => {
-  console.log(socket);
+  // console.log(socket);
   console.log("Socket is activated");
 
   socket.on("chat", (payload) => {

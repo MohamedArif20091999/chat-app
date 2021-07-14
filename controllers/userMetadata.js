@@ -6,7 +6,12 @@ exports.getUsers = async (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.send(userData);
+        const userId = res.locals.user.id;
+        userData.forEach((user) => console.log(user._id));
+        const users = userData.filter((user) => {
+          return user._id != userId;
+        });
+        res.send(users);
       }
     });
   } catch (err) {

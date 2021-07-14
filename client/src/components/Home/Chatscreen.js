@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 // change it to dotenv
 const socket = io.connect("http://localhost:5000");
-const Chatscreen = () => {
+const Chatscreen = ({ selectedUser }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const userName = "Arif";
@@ -21,9 +21,21 @@ const Chatscreen = () => {
       setChat([...chat, payload]);
     });
   });
+
+  const renderItem = () => {
+    if (selectedUser) {
+      return (
+        <div>
+          <h1>{selectedUser}</h1>
+        </div>
+      );
+    }
+    return <h1>Welcome</h1>;
+  };
+
   return (
     <div>
-      <h1>Chatty app</h1>
+      {renderItem()}
       {chat.map((payload, index) => {
         return (
           <p key={index}>
