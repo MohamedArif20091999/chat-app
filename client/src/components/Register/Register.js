@@ -1,10 +1,22 @@
-import react from "react";
+import react, { useState, useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../actions/index";
+
 import "./register.css";
 
 const Register = () => {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
   let history = useHistory();
+
+  const register = (userName, email, password) => {
+    dispatch(registerUser(userName, email, password));
+  };
 
   return (
     <div className="Register">
@@ -31,7 +43,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input onChange={(e) => setUserName(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="email"
@@ -43,7 +55,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input />
+          <Input onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -55,7 +67,7 @@ const Register = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password onChange={(e) => setPassword(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -64,7 +76,11 @@ const Register = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button
+            onClick={() => register(userName, email, password)}
+            type="primary"
+            htmlType="submit"
+          >
             Submit
           </Button>
         </Form.Item>

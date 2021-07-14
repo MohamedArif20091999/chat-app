@@ -4,8 +4,9 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 exports.register = (req, res) => {
+  console.log("REQ BODY:", req.body);
   const { userName, email, password } = req.body;
-  console.log(req);
+  console.log(req.data);
 
   User.findOne(
     {

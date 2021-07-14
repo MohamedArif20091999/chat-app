@@ -8,11 +8,8 @@ const socketio = require("socket.io")(server);
 
 const authRoutes = require("./routes/authRoutes");
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
 
