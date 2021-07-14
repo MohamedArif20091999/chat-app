@@ -1,7 +1,18 @@
-import react from "react";
+import react, { useState } from "react";
 import { Form, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../actions/auth";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const login = () => {
+    console.log(email, password);
+    dispatch(loginUser(email, password));
+  };
+
   return (
     <div className="Login">
       <Form
@@ -26,7 +37,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input />
+          <Input onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -38,16 +49,15 @@ const Login = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password onChange={(e) => setPassword(e.target.value)} />
         </Form.Item>
-
         <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button onClick={login} type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

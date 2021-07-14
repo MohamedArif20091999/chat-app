@@ -14,3 +14,12 @@ export const registerUser = (userName, email, password) => async (dispatch) => {
     history.push("/login");
   }
 };
+
+export const loginUser = (email, password) => async (dispatch) => {
+  console.log("EMAIL PASS:", email, password);
+  const res = await axios.post("/auth/login", {
+    email: email,
+    password: password,
+  });
+  console.log("LOGIN RESP:", res.data);
+};
