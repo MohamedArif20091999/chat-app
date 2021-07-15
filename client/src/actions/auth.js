@@ -27,5 +27,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   if (res.data.status === "success") {
     console.log("Success route to home");
     history.push("/home");
+  } else {
+    console.log("Auth failed");
   }
 };

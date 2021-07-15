@@ -14,12 +14,16 @@
 .chat-header{
     /* position: fixed; */
     /* width: 100%; */
-    min-width: 100% !important;
+    width: 100% !important;
     margin: 16px 0;
     padding: 6px 16px;
     color:white !important;
     background-color: #54436B;
     
+}
+.message-input{
+    margin-top: 20%;
+    margin-left:  30%;
 }
 .chat-item{
     float: right;
@@ -41,6 +45,9 @@
 }
 .side-head-main{
     text-align: center;
+}
+.btn{
+    padding-bottom: 10px;
 }
 /* a:hover{
     color: blue !important;

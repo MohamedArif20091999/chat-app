@@ -72,18 +72,20 @@ const Chatscreen = ({ selectedUser, selectedUserName, chat, updateState }) => {
               </p>
             </div>
           ))}
-          <form onSubmit={sendChat}>
-            <input
-              type="text"
-              name="chat"
-              placeholder="send text"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            />
-            <button type="submit">Send</button>
-          </form>
+          <div className="message-input">
+            <form onSubmit={sendChat}>
+              <input
+                type="text"
+                name="chat"
+                placeholder="Type your message"
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+              <button type="submit">Send</button>
+            </form>
+          </div>
         </div>
       );
     }
