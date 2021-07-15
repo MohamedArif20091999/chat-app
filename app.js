@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
     // socket.broadcast.to(payload.to).emit("sendMsg", {
     //   msg: payload.message,
     // });
-    io.sockets.in(payload.to).emit("chat", { msg: data });
+    io.sockets.in(payload.to, payload.from).emit("chat", { msg: data });
   });
 
   console.log(
