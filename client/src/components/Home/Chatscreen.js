@@ -3,6 +3,7 @@ import io from "socket.io-client";
 
 // change it to dotenv
 const socket = io.connect("http://localhost:5000");
+socket.emit("join", { userId: localStorage.getItem("userId") });
 
 const Chatscreen = ({ selectedUser }) => {
   const [message, setMessage] = useState("");
@@ -19,8 +20,14 @@ const Chatscreen = ({ selectedUser }) => {
   };
   useEffect(() => {
     socket.on("chat", (payload) => {
-      setChat([...chat, payload]);
+      setChat([payload.msg]);
+      alert(payload.msg);
+      console.log(payload.msg);
     });
+  });
+
+  useEffect(() => {
+    socket.on("chat");
   });
 
   useEffect(() => {
@@ -41,6 +48,7 @@ const Chatscreen = ({ selectedUser }) => {
   return (
     <div>
       {renderItem()}
+      <h1>{chat[0]}</h1>
       {chat.map((payload, index) => {
         return (
           <p key={index}>

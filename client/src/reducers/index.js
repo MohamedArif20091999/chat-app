@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { usersMetaData } from "./usersMetaData";
+import { usersMetaData, myData } from "./usersMetaData";
 
 export const test = (state = "Hello", action) => {
   return "test";
@@ -8,4 +8,5 @@ export const test = (state = "Hello", action) => {
 export default combineReducers({
   test,
   allUsers: usersMetaData,
+  myData,
 });

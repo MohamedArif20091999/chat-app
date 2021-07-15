@@ -18,3 +18,22 @@ exports.getUsers = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.getUserDetail = async (req, res) => {
+  try {
+    await User.findOne(
+      { _id: res.locals.user.id },
+      "-password",
+      (err, userData) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(userData);
+          res.send(userData);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};

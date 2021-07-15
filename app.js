@@ -28,7 +28,21 @@ io.on("connection", (socket) => {
 
   socket.on("chat", (payload) => {
     chatService(payload);
-    io.emit("chat", payload);
+    // io.emit("chat", payload);
+    // socket.broadcast.to(payload.to).emit("sendMsg", {
+    //   msg: payload.message,
+    // });
+    io.sockets.in(payload.to).emit("chat", { msg: payload.message });
+  });
+
+  console.log(
+    "PLEASE WORK:"
+    // io.sockets.in(payload.to).emit("chat", { msg: payload.message })
+  );
+
+  socket.on("join", (data) => {
+    console.log("ON JOIN: ", data);
+    socket.join(data.userId);
   });
 });
 

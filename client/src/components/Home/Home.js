@@ -1,6 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../../actions";
+import { getAllUsers, getMyDetail } from "../../actions";
 import { Layout, Menu, List, Avatar, Table } from "antd";
 import Chatscreen from "./Chatscreen";
 
@@ -18,6 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getMyDetail());
   }, []);
   const selected = (user) => {
     setSelectedUser(user);

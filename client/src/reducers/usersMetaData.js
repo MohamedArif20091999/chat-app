@@ -8,3 +8,13 @@ export const usersMetaData = (state = [], action) => {
       return state;
   }
 };
+
+export const myData = (state = {}, action) => {
+  switch (action.type) {
+    case "MY_DATA":
+      console.log("MY_DATA", action.payload);
+      return action.payload;
+    default:
+      return state;
+  }
+};
