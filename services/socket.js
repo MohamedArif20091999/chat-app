@@ -8,4 +8,5 @@ exports.chatService = async (data) => {
     message: data.message,
   });
   await newMessage.save();
+  return newMessage;
 };

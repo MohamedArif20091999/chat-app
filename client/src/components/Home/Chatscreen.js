@@ -1,44 +1,52 @@
 import react, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateChat } from "../../actions";
 import io from "socket.io-client";
 
 // change it to dotenv
-const socket = io.connect("http://localhost:5000");
-socket.emit("join", { userId: localStorage.getItem("userId") });
 
-const Chatscreen = ({ selectedUser }) => {
+const Chatscreen = ({ selectedUser, chat, updateState }) => {
+  const socket = io.connect("http://localhost:5000");
+  socket.emit("join", { userId: localStorage.getItem("userId") });
+
+  let dispatch = useDispatch();
+  let me = useSelector((state) => state.myData);
+
   const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([]);
-  const userName = "Arif";
+  // const [newChat, setNewChat] = useState([]);
+  const [chatItems, setChatItems] = useState([]);
+
   const sendChat = (e) => {
     e.preventDefault();
     socket.emit("chat", {
       message,
-      from: "60eec4931d6ddc418d787fb0",
-      to: "60eee66391f94710aea293bc",
+      from: me._id,
+      to: selectedUser,
     });
     setMessage("");
   };
   useEffect(() => {
     socket.on("chat", (payload) => {
-      setChat([payload.msg]);
-      alert(payload.msg);
-      console.log(payload.msg);
+      console.log("PAYLOOD:", payload.msg);
+      // update(payload.msg);
+      dispatch(updateChat(payload.msg));
+      console.log(payload);
     });
   });
 
-  useEffect(() => {
-    socket.on("chat");
-  });
-
-  useEffect(() => {
-    console.log("LOG AFTER SELECTED CHANGE", selectedUser);
-  }, [selectedUser]);
+  const update = (data) => {
+    dispatch(updateChat(data));
+  };
 
   const renderItem = () => {
     if (selectedUser) {
       return (
         <div>
           <h1>{selectedUser}</h1>
+
+          {chat.map((item) => (
+            <p> {item.message} </p>
+          ))}
         </div>
       );
     }
@@ -48,14 +56,15 @@ const Chatscreen = ({ selectedUser }) => {
   return (
     <div>
       {renderItem()}
-      <h1>{chat[0]}</h1>
-      {chat.map((payload, index) => {
+      {/* <h1>{chat[0]}</h1> */}
+      {/* {chat.map((payload, index) => {
         return (
-          <p key={index}>
-            {payload.message}: <span>id: {payload.userName}</span>
-          </p>
+          <p> {payload.message} </p>
+          // <p key={index}>
+          //   {payload.message}: <span>id: {payload.userName}</span>
+          // </p>
         );
-      })}
+      })} */}
       <form onSubmit={sendChat}>
         <input
           type="text"

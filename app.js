@@ -15,24 +15,27 @@ const io = require("socket.io")(server, {
 });
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/authRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/chat", chatRoutes);
 
 io.on("connection", (socket) => {
   // console.log(socket);
   console.log("Socket is activated");
 
-  socket.on("chat", (payload) => {
-    chatService(payload);
+  socket.on("chat", async (payload) => {
+    let data = await chatService(payload);
+    console.log("return from cs:", data);
     // io.emit("chat", payload);
     // socket.broadcast.to(payload.to).emit("sendMsg", {
     //   msg: payload.message,
     // });
-    io.sockets.in(payload.to).emit("chat", { msg: payload.message });
+    io.sockets.in(payload.to).emit("chat", { msg: data });
   });
 
   console.log(

@@ -1,34 +1,40 @@
 import react, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, getMyDetail } from "../../actions";
+import { getAllUsers, getMyDetail, getChat } from "../../actions";
 import { Layout, Menu, List, Avatar, Table } from "antd";
 import Chatscreen from "./Chatscreen";
 
 import "./home.css";
+import { set } from "mongoose";
 
 const { SubMenu } = Menu;
 
 const { Header, Content, Sider } = Layout;
 
 const Home = () => {
+  // const [userChat, setUserChat] = useState([]);
+
   const [selectedUser, setSelectedUser] = useState("");
 
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.allUsers);
+  const chat = useSelector((state) => state.chat);
 
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getMyDetail());
   }, []);
-  const selected = (user) => {
+  const setUser = (user) => {
     setSelectedUser(user);
+    dispatch(getChat(user));
+
+    console.log("CHAT", chat);
   };
 
   console.log(selectedUser);
 
   const renderItem = () => {
     if (allUsers.length) {
-      // setSelectedUser(allUsers[0]._id);
       return (
         <Layout>
           <Header className="header" style={{}}>
@@ -55,7 +61,7 @@ const Home = () => {
                 renderItem={(item) => (
                   <List.Item
                     key={item._id}
-                    onClick={() => setSelectedUser(item._id)}
+                    onClick={() => setUser(item._id)}
                     className="list-item"
                   >
                     <a>
@@ -77,7 +83,11 @@ const Home = () => {
                 className="content"
                 style={{ margin: "44px 300px 0", overflow: "initial" }}
               >
-                <Chatscreen selectedUser={selectedUser}></Chatscreen>
+                <Chatscreen
+                  updateState={chat}
+                  selectedUser={selectedUser}
+                  chat={chat}
+                ></Chatscreen>
               </Content>
             </Layout>
           </Layout>
