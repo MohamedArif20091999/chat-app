@@ -19,6 +19,19 @@ const Chatscreen = ({ selectedUser, selectedUserName, chat, updateState }) => {
   const [message, setMessage] = useState("");
   const [chatItems, setChatItems] = useState(chat);
 
+  useEffect(() => {
+    socket.on("chat", (payload) => {
+      {
+        openNotification(payload);
+      }
+      dispatch(updateChat(payload.msg));
+      setChat(payload.msg);
+    });
+  }, []);
+  const setChat = (data) => {
+    setChatItems([...chatItems, data]);
+  };
+
   const sendChat = (e) => {
     e.preventDefault();
     socket.emit("chat", {
@@ -27,25 +40,6 @@ const Chatscreen = ({ selectedUser, selectedUserName, chat, updateState }) => {
       to: selectedUser,
     });
     setMessage("");
-  };
-  useEffect(() => {
-    socket.on("chat", (payload) => {
-      {
-        openNotification(payload);
-      }
-      console.log("PAYLOOD:", payload.msg);
-      dispatch(updateChat(payload.msg));
-      setChat(payload.msg);
-      console.log(payload);
-    });
-  }, []);
-  const setChat = (data) => {
-    setChatItems([...chatItems, data]);
-    console.log("Experiment:", chatItems);
-  };
-
-  const update = (data) => {
-    dispatch(updateChat(data));
   };
 
   const openNotification = (payload) => {

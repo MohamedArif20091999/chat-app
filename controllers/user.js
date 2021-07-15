@@ -47,7 +47,6 @@ exports.register = (req, res) => {
 exports.logIn = async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
-  console.log("LOGIN CREDS:", email, password);
   await User.findOne(
     {
       email: email,
@@ -68,11 +67,8 @@ exports.logIn = async (req, res) => {
                   expiresIn: "7d",
                 }
               );
-              // console.log('User credentials are valid!');
               console.log("FOUND USER:", token, foundUser);
-              // res.cookie("jid", token, {
-              //   httpOnly: true,
-              // });
+
               return res.send({
                 status: "success",
                 message: "Login Successful.",
@@ -87,7 +83,6 @@ exports.logIn = async (req, res) => {
                 status: "failure",
                 message: "Invalid credentials.",
               });
-              // console.log('The username or password was incorrect.');
             }
           });
         } else {
@@ -95,7 +90,6 @@ exports.logIn = async (req, res) => {
             status: "failure",
             message: "Invalid credentials.",
           });
-          // console.log('The username or password was incorrect.');
         }
       }
     }
