@@ -6,7 +6,29 @@
 }
 .content{
     font-size: 1.5rem;
+    height: 90vh !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
 }
+.chat-header{
+    /* position: fixed; */
+    /* width: 100%; */
+    min-width: 100% !important;
+    margin: 16px 0;
+    padding: 6px 16px;
+    color:white !important;
+    background-color: #54436B;
+    
+}
+.chat-item{
+    float: right;
+    margin: 40px 0 ;
+}
+.userName{
+    color: white;
+}
+
 .list-item:hover{
     background-color: #00000029;
     cursor: pointer;

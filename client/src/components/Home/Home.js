@@ -39,9 +39,9 @@ const Home = () => {
     if (allUsers.length) {
       return (
         <Layout>
-          <Header className="header" style={{}}>
+          {/* <Header className="header" style={{}}>
             <div className="logo"></div>
-          </Header>
+          </Header> */}
           <Layout>
             <Sider
               width={260}
@@ -80,11 +80,8 @@ const Home = () => {
                 )}
               />
             </Sider>
-            <Layout>
-              <Content
-                className="content"
-                style={{ margin: "44px 300px 0", overflow: "initial" }}
-              >
+            <Layout className="content">
+              <Content style={{ margin: "44px 300px 0", overflow: "initial" }}>
                 <Chatscreen
                   selectedUserName={selectedUserName}
                   updateState={chat}
