@@ -3,6 +3,7 @@ import io from "socket.io-client";
 
 // change it to dotenv
 const socket = io.connect("http://localhost:5000");
+
 const Chatscreen = ({ selectedUser }) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
@@ -21,6 +22,10 @@ const Chatscreen = ({ selectedUser }) => {
       setChat([...chat, payload]);
     });
   });
+
+  useEffect(() => {
+    console.log("LOG AFTER SELECTED CHANGE", selectedUser);
+  }, [selectedUser]);
 
   const renderItem = () => {
     if (selectedUser) {
