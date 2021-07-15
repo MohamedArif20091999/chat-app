@@ -20,14 +20,15 @@ export const loginUser = (email, password) => async (dispatch) => {
     email: email,
     password: password,
   });
-  const token = res.data.token;
-  localStorage.setItem("jid", token);
-  localStorage.setItem("userId", res.data.user.userId);
-  // localStorage.setItem("userName", res.data.user.userName);
+
   if (res.data.status === "success") {
+    const token = res.data.token;
+    localStorage.setItem("jid", token);
+    localStorage.setItem("userId", res.data.user.userId);
     console.log("Success route to home");
     history.push("/home");
   } else {
     console.log("Auth failed");
+    dispatch({ type: "AUTH_FAIL", payload: "auth_err" });
   }
 };

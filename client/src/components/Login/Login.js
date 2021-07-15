@@ -1,6 +1,6 @@
-import react, { useState } from "react";
-import { Form, Input, Button } from "antd";
-import { useDispatch } from "react-redux";
+import react, { useState, useEffect } from "react";
+import { Form, Input, Button, notification } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../actions/auth";
 import { useHistory } from "react-router-dom";
 
@@ -11,10 +11,27 @@ const Login = () => {
   let history = useHistory();
 
   const dispatch = useDispatch();
+
+  const openNotificationWithIcon = (type) => {
+    notification["error"]({
+      message: "Authentication Failed",
+      description: "Bad credentials",
+    });
+  };
   const login = () => {
-    console.log(email, password);
     dispatch(loginUser(email, password));
   };
+
+  const auth = useSelector((state) => state.auth);
+  if (auth === "auth_err") {
+    openNotificationWithIcon();
+  }
+
+  useEffect(() => {
+    if (auth == "auth_err") {
+      openNotificationWithIcon();
+    }
+  }, []);
 
   return (
     <div className="Login">
