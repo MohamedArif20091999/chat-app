@@ -14,7 +14,7 @@ const Chatscreen = ({ selectedUser, chat, updateState }) => {
 
   const [message, setMessage] = useState("");
   // const [newChat, setNewChat] = useState([]);
-  const [chatItems, setChatItems] = useState([]);
+  const [chatItems, setChatItems] = useState(chat);
 
   const sendChat = (e) => {
     e.preventDefault();
@@ -30,9 +30,14 @@ const Chatscreen = ({ selectedUser, chat, updateState }) => {
       console.log("PAYLOOD:", payload.msg);
       // update(payload.msg);
       dispatch(updateChat(payload.msg));
+      setChat(payload.msg);
       console.log(payload);
     });
-  });
+  }, []);
+  const setChat = (data) => {
+    setChatItems([...chatItems, data]);
+    console.log("Experiment:", chatItems);
+  };
 
   const update = (data) => {
     dispatch(updateChat(data));
