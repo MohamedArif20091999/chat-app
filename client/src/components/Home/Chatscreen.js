@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 // change it to dotenv
 
-const Chatscreen = ({ selectedUser, chat, updateState }) => {
+const Chatscreen = ({ selectedUser, selectedUserName, chat, updateState }) => {
   const socket = io.connect("http://localhost:5000");
   socket.emit("join", { userId: localStorage.getItem("userId") });
 
@@ -47,7 +47,7 @@ const Chatscreen = ({ selectedUser, chat, updateState }) => {
     if (selectedUser) {
       return (
         <div>
-          <h1>{selectedUser}</h1>
+          <h1>{selectedUserName}</h1>
 
           {chat.map((item) => (
             <p> {item.message} </p>

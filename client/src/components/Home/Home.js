@@ -15,6 +15,7 @@ const Home = () => {
   // const [userChat, setUserChat] = useState([]);
 
   const [selectedUser, setSelectedUser] = useState("");
+  const [selectedUserName, setSelectedUserName] = useState("");
 
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.allUsers);
@@ -24,8 +25,9 @@ const Home = () => {
     dispatch(getAllUsers());
     dispatch(getMyDetail());
   }, []);
-  const setUser = (user) => {
+  const setUser = (user, name) => {
     setSelectedUser(user);
+    setSelectedUserName(name);
     dispatch(getChat(user));
 
     console.log("CHAT", chat);
@@ -61,7 +63,7 @@ const Home = () => {
                 renderItem={(item) => (
                   <List.Item
                     key={item._id}
-                    onClick={() => setUser(item._id)}
+                    onClick={() => setUser(item._id, item.userName)}
                     className="list-item"
                   >
                     <a>
@@ -84,6 +86,7 @@ const Home = () => {
                 style={{ margin: "44px 300px 0", overflow: "initial" }}
               >
                 <Chatscreen
+                  selectedUserName={selectedUserName}
                   updateState={chat}
                   selectedUser={selectedUser}
                   chat={chat}
