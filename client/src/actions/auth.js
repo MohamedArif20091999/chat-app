@@ -1,9 +1,7 @@
 import axios from "axios";
-// import { history } from "../index";
 import history from "../history";
 
 export const registerUser = (userName, email, password) => async (dispatch) => {
-  console.log(userName, email, password);
   const res = await axios.post("/auth/register", {
     userName: userName,
     email: email,
@@ -20,10 +18,13 @@ export const loginUser = (email, password) => async (dispatch) => {
     email: email,
     password: password,
   });
-  const token = res.data.token;
-  localStorage.setItem("jid", token);
+
   if (res.data.status === "success") {
-    console.log("Success route to home");
+    const token = res.data.token;
+    localStorage.setItem("jid", token);
+    localStorage.setItem("userId", res.data.user.userId);
     history.push("/home");
+  } else {
+    dispatch({ type: "AUTH_FAIL", payload: "auth_err" });
   }
 };

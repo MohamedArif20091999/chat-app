@@ -1,3 +1,54 @@
+*{
+    font-family: 'Lato', sans-serif;
+}
 .ant-layout-sider{
     background-color: whitesmoke ;
 }
+.content{
+    font-size: 1.5rem;
+    height: 90vh !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+}
+.chat-header{
+    /* position: fixed; */
+    /* width: 100%; */
+    width: 100% !important;
+    margin: 16px 0;
+    padding: 6px 16px;
+    color:white !important;
+    background-color: #54436B;
+    
+}
+.message-input{
+    margin-top: 20%;
+    margin-left:  30%;
+}
+.chat-item{
+    float: right;
+    margin: 40px 0 ;
+}
+.userName{
+    color: white;
+}
+
+.list-item:hover{
+    background-color: #00000029;
+    cursor: pointer;
+}
+.list-item::selection{
+    background-color: #00000029;
+}
+.side-head{
+    font-size: 1.5rem;
+}
+.side-head-main{
+    text-align: center;
+}
+.btn{
+    padding-bottom: 10px;
+}
+/* a:hover{
+    color: blue !important;
+} */
