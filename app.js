@@ -17,6 +17,7 @@ const io = require("socket.io")(server, {
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const resetRoutes = require("./routes/reset");
 
 // APP CONFIG
 
@@ -26,6 +27,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/chat", chatRoutes);
+
+// ROUTES NEEDED UI COMPONENTS
+app.use("/reset/reset-chats", resetRoutes);
+
+//
 
 io.on("connection", (socket) => {
   console.log("Socket is activated");
