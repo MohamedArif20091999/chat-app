@@ -2,8 +2,6 @@ const Message = require("../models/Message");
 
 exports.getChat = async (req, res) => {
   try {
-    console.log("fetch all chat");
-    console.log(req.body.userId);
     const fromMe = await Message.find(
       {
         $and: [
